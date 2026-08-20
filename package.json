@@ -1,0 +1,27 @@
+{
+  "name": "url-shortener",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "npm@10.9.2",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "db:migrate": "npm run db:migrate --workspace=@url-shortener/api",
+    "dev:reset": "pkill -f 'next dev' || true; pkill -f 'next-server' || true; pkill -f 'tsx watch' || true; rm -rf apps/web/.next .turbo apps/*/.turbo; echo 'dev state reset — now run: npm run dev'"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "eslint": "^9.20.0",
+    "eslint-config-prettier": "^10.0.1",
+    "prettier": "^3.5.0",
+    "turbo": "^2.4.0",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.0"
+  }
+}
