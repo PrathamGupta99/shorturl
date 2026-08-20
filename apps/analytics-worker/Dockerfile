@@ -26,7 +26,10 @@ RUN npm prune --omit=dev
 
 FROM base AS runner
 ENV NODE_ENV=production
+ENV NODE_EXTRA_CA_CERTS=/app/certs/aiven-project-ca.pem
 RUN addgroup -S app && adduser -S app -G app
 COPY --from=installer /app ./
+# Aiven's PostgreSQL and Kafka services use this public project CA.
+COPY infra/certs/aiven-project-ca.pem /app/certs/aiven-project-ca.pem
 USER app
 CMD ["node", "apps/analytics-worker/dist/index.js"]
